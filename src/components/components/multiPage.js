@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export const useMultiPage = (pgs, sub =()=>{}, messages={}, supress)=>{
+export const useMultiPage = (pgs, sub =()=>{}, messages={},supress)=>{
     const pages = Array.isArray(pgs) ? pgs : [null];
     const [index, setIndex] = useState(0);
     // const [data, setData] = useState(defData);
@@ -13,10 +13,10 @@ export const useMultiPage = (pgs, sub =()=>{}, messages={}, supress)=>{
     }
 
     // const updateData = (newData) => setData({...data, ...newData});
-    const onSub = (e)=>{
+    const onSub = (e,retData)=>{
         e.preventDefault();
         if (isLast){
-            if (sub){ sub(e);}
+            if (sub){ sub(e, retData());}
             if (!supress){ e.target.submit(); }
             return;
         }

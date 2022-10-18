@@ -1,6 +1,6 @@
 import './App.css';
 import {TheForm} from './components/components/sample';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 const defaultData={
   name:'',
@@ -25,14 +25,17 @@ function useManagedData(defaultData = {}) {
     return [ data, updateFieldSet , updateField]
 }
 function App() {
-  const [data,updateFS, updateData] = useManagedData(defaultData);
-
+  const [data,, updateData] = useManagedData(defaultData);
+  const retData=  ()=>data
   return (
     <div className="App">
       <TheForm
       pages={ ['hi','otter!','bear', <InputF lbl="sample"
       data={data.samp} update={updateData} />, 'rabbit']}
-      subFoo={()=>alert(1)}
+      retData={retData}
+      subFoo={(e,ret)=>{
+        alert(JSON.stringify(ret))
+      }}
       />
     </div>
   );
