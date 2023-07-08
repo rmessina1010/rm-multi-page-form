@@ -7,8 +7,8 @@ export const TheForm =({pages, subFoo, retData})=>{
     const {thePage, next, prev, stat, onSub}= useMultiPage(pages, subFoo);
     return (
         <form onSubmit={e=>onSub(e,retData)} >
-            <p>{renders.current}</p>
-            <p>{stat}{retData().samp}</p>
+            <p>Total renders: {renders.current}</p>
+            <p>page: {stat} data:{retData().samp}</p>
             <p>{thePage}</p>
             {prev}{prev?" | ":""}{next}
         </form>
