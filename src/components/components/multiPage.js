@@ -1,5 +1,13 @@
 import {useState} from 'react';
 
+
+export const useManagedData = function  (defaultData = {}) {
+    const [data,setData] = useState(defaultData);
+    const  updateField = (fieldName, val) => setData(currentData=>{return {...currentData, [fieldName]:val}} )
+    const  updateFieldSet = (fieldSet) => setData(currentData=>{return {...currentData, ...fieldSet}} )
+    return [ data, updateFieldSet , updateField]
+}
+
 export const useMultiPage = (pgs, sub =()=>{}, messages={},supress)=>{
     const pages = Array.isArray(pgs) ? pgs : [null];
     const [index, setIndex] = useState(0);

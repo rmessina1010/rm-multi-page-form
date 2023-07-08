@@ -1,5 +1,5 @@
  import { useEffect,useRef } from "react";
-import { useMultiPage } from "./multiPage"
+import { useMultiPage} from "./multiPage"
 
 export const TheForm =({pages, subFoo, retData})=>{
     let  renders = useRef(0);

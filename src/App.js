@@ -1,6 +1,6 @@
 import './App.css';
 import {TheForm} from './components/components/sample';
-import { useState, useMemo } from 'react';
+import {useManagedData} from './components/components/multiPage';
 import { PreSetFields, InputF} from './components/pages/pages';
 
 const defaultData={
@@ -12,18 +12,16 @@ const defaultData={
   field3:null,
 }
 
-function useManagedData(defaultData = {}) {
-    const [data,setData] = useState(defaultData);
-    const  updateField = (fieldName, val) => setData(currentData=>{return {...currentData, [fieldName]:val}} )
-    const  updateFieldSet = (fieldSet) => setData(currentData=>{return {...currentData, ...fieldSet}} )
-    return [ data, updateFieldSet , updateField]
-}
 function App() {
   const [data,, updateData] = useManagedData(defaultData);
-  const retData=  ()=>data
+  const retData=  ()=>data;
+
   return (
     <div className="App">
       <h1>multi-page form test</h1>
+      <ul>Outside of form...{Object.keys(data).map(d=><li><b>{d}</b>:{data[d]}</li>)}</ul>
+      <p>{data.field3 == data.samp ? 'yes':'no'}</p>
+
       <TheForm
         pages={[
             'hi',
@@ -33,7 +31,7 @@ function App() {
             'rabbit' ,
             <PreSetFields data={data} update={updateData}/>
         ]}
-        retData={retData}
+        retData= {retData}
         subFoo={(e,ret)=>{
           alert(JSON.stringify(ret))
         }}
